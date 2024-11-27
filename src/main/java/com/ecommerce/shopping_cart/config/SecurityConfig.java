@@ -1,6 +1,5 @@
 package com.ecommerce.shopping_cart.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,6 +42,7 @@ public class SecurityConfig {
             )
             .addFilterBefore(new JwtAuthenticationFilter(userServiceImpl, jwtUtils), UsernamePasswordAuthenticationFilter.class);
 
+            http.cors();
         return http.build();
     }
 

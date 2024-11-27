@@ -2,6 +2,8 @@ package com.ecommerce.shopping_cart.filters;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +19,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter  {
+
+    //Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     private UserServiceImpl userServiceImpl;
     private JwtUtils jwtUtils;
@@ -41,6 +45,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter  {
             }
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
                 UserDetails userDetails = userServiceImpl.loadUserByUsername(username);
 
                 if (jwtUtils.validateToken(jwt, userDetails)) {
